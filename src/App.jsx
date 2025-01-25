@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Icon } from '@iconify-icon/react/dist/iconify.js';
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
+import SessionForm from './SessionForm';
 
 const baseURL = "https://codetest-backend-wp9t.onrender.com"
 
@@ -84,8 +85,11 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user.name || !user.email || !user.phone || !termsAccepted || cart.length === 0) {
+    if (!user.name || !user.email || !user.phone || !termsAccepted) {
       setMessage('Please fill out all fields and accept the terms.');
+      return;
+    }else if(cart.length === 0){
+      setMessage('Your Cart is empty.');
       return;
     }
 
@@ -291,6 +295,7 @@ function App() {
       </form>
       {message && <p className="mt-4">{message}</p>}
     </div>
+    {/* <SessionForm /> */}
     </>
   );
 }
